@@ -1,0 +1,357 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  }
+  
+  a {
+    color: #00B7FF;
+  }
+  
+  p{
+    font-size: 20px;
+  }
+  
+  html {
+    overflow-y: scroll;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .my-h1 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .location-display {
+    display: flex;
+    align-items: center;
+    color: #1877f2; /* Facebook blue color */
+    font-size: 1rem;
+  }
+  
+  .location-icon {
+    font-size: 1.2rem;
+    color: #1877f2;
+    margin-right: 5px;
+  }
+  
+  .location-text {
+    color: #1877f2;
+  }
+  
+  
+  /* Container for the grid layout */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Adjust the number to change books per row */
+    gap: 15px; /* Space between books */
+    padding: 10px;
+  }
+  
+  /* Individual book card */
+  .product-card {
+    border: 0px none #ddd ;
+    padding: 1px 1px;
+    border-radius: 15px;
+    text-align: left;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  
+  .product-img {
+    width: 300px;
+    height: 350px;
+    border: 1px solid #ddd;
+    border-radius: 15px;  
+  }
+  
+  .sell-product,
+  .edit-product,
+  .product-link {
+    text-decoration: none; 
+    color: inherit; 
+  }
+  
+  
+  .top-navigation{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    z-index: 1000;
+    padding: 0.5rem 1rem;
+    align-items: center;
+    display: flex;
+  }
+  
+  .facebook-icon{
+    font-size: 2.5rem; 
+    color: cornflowerblue; 
+    margin-right: 10px;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem; /* Adjust text size as needed */
+    font-weight: bold;
+    color: cornflowerblue; /* Matches the icon color */
+    margin-right: 20px; /* Space between "Facebook" text and search icon */
+  }
+  
+  .search-icon{
+    font-size: 1.5rem; 
+    color: darkgray; 
+    margin-left: 5px;  
+    cursor: pointer;
+    padding: 8px; 
+    border-radius: 50%; 
+    transition: background-color 0.3s;
+  }
+  
+  .top-mid-nav{
+    display: flex;
+    justify-content: center;
+    flex: 0.9;
+  }
+  
+  .top-mid-nav a { 
+    display: flex; 
+    align-items: center;  
+  }
+  
+  .top-right-nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto; 
+    padding-right: 15px; 
+  }
+  
+  .login-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .login-form input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  
+  .login-form input:focus {
+    border-color: #b0b0b0;
+  }
+  
+  .login-button {
+    padding: 10px 20px;
+    background-color: #1877f2; /* Facebook blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .login-button:hover {
+    background-color: #145dbf; /* Darker blue on hover */
+  }
+  
+  .forgot-link {
+    color: #1877f2; /* Matching link color */
+    font-size: 0.9rem;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+  
+  .forgot-link:hover {
+    text-decoration: underline;
+  }
+  
+  
+  .people-icon,
+  .game-icon{
+    font-size: 2rem;  
+    margin-left: 50px;  
+    margin-right: 50px; 
+    cursor: pointer;
+    color:#888888;
+    padding: 6px; 
+    border-radius: 50%; 
+    transition: background-color 0.3s;
+  }
+  
+  .house-icon,
+  .google-icon{
+    font-size: 1.8rem;  
+    margin-left: 50px;  
+    margin-right: 50px; 
+    cursor: pointer;
+    color:#888888;
+    padding: 6px; 
+    border-radius: 50%; 
+    transition: background-color 0.3s;
+  }
+  
+  
+  .account-icon,
+  .msg-icon{
+    font-size: 1.6rem;  
+    margin-left: 5px;  
+    margin-right: 10px; 
+    cursor: pointer;
+    color:#666666;
+    padding: 8px; 
+    border-radius: 50%; 
+    transition: background-color 0.3s;
+  }
+  
+  .product-card:hover{
+    text-decoration: underline;
+  }
+  
+  .house-icon:hover,
+  .people-icon:hover,
+  .game-icon:hover,
+  .google-icon:hover, 
+  .search-icon:hover,
+  .msg-icon:hover,
+  .account-icon:hover
+  {
+    background-color: #e0e0e0;
+  }
+  
+  .left-navigation {
+    margin-top: -1px; /* Adjust this value based on the height of your top nav */
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-right: 5px;
+    position: fixed;
+    left: 0;
+    width: 260px; /* Set the width for the sidebar */
+    height: calc(100vh - 40px); /* Ensure it fills the remaining viewport height */
+    overflow-y: auto;
+    background-color: #ffffff;
+    border-right:1px solid #b8b6b6;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    font-size: 1.2rem;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+  }
+  
+  .nav-item2 {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    font-size: 1.5rem;
+    color: #616161;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+  }
+  
+  .nav-item:hover, 
+  .nav-item2:hover {
+    background-color: #ddd;
+  }
+  
+  .icon {
+    margin-right: 10px;
+    font-size: 1.5rem;
+    color: rgb(110, 108, 108);
+  }
+  
+  .category {
+    margin-top: 20px;
+  }
+  
+  .location, .category i {
+    font-size: 1rem;
+  }
+  
+  .main-content {
+    margin-left: 230px; 
+  }
+  
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    gap: 15px;
+  }
+  
+  .pagination-numbers {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .pagination-button {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #1877f2;
+    background-color: white;
+    transition: background-color 0.2s;
+  }
+  
+  .pagination-button:hover {
+    background-color: #f0f2f5;
+    text-decoration: none;
+  }
+  
+  .pagination-current {
+    padding: 8px 15px;
+    background-color: #1877f2;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .pagination-goto {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  
+  .pagination-goto input {
+    width: 80px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .pagination-goto button {
+    padding: 8px 15px;
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .pagination-goto button:hover {
+    background-color: #166fe5;
+  }
+  
+  
+  
+  
+  

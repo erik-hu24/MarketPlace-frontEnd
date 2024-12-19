@@ -1,0 +1,91 @@
+/* Center the container and add padding */
+.product-details-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+/* Product title */
+.product-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Flexbox layout for image and details */
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Image styling */
+.product-image {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Details container */
+.product-meta {
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Styling each detail line with consistent label width */
+.product-meta p {
+    display: flex;
+    margin: 10px 0;
+}
+
+.product-meta strong {
+    color: #555;
+    font-weight: bold;
+    min-width: 120px; /* Sets a consistent width for labels */
+}
+
+/* Styling for the "Back to Products" link */
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #1877f2;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #145dbf;
+    text-decoration: underline;
+}
+
+/* Style for both buttons */
+.button-container a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect */
+  .button-container a:hover {
+    background-color: #0056b3;
+  }
+  
