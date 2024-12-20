@@ -351,6 +351,19 @@ body {
     background-color: #166fe5;
   }
   
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .welcome-text {
+    font-size: 1.5rem; /* 字体大小 */
+    font-weight: bold; /* 粗体 */
+    color: #4a90e2; /* 蓝色 */
+    margin-right: 20px; /* 和注销按钮保持间距 */
+  }
+  
   
   
   

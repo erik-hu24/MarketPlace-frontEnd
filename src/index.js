@@ -6,9 +6,11 @@ import ProductDetail from './components/Product-detail';
 import ProductEditVerify from './components/Product-edit-verify';
 import ProductEditPage from './components/Product-edit-page';
 import LoginPage from './components/Login_page'; // Your Login page component
+import RegisterPage from './components/Register_page';
 import DeleteSuccess from './components/Delete-success';
 import ProductCreate from './components/Product-create'
 import CreateSuccess from './components/Create-success';
+import { AuthProvider } from "./AuthContext"; // 导入 AuthContext
 
 import reportWebVitals from './reportWebVitals';
 import{
@@ -20,21 +22,24 @@ import{
 
 export default function App(){
   return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Products />} />
-          <Route path="/available" element={<Products />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/product/:productID" element={<ProductDetail />} />
-          <Route path="/edit/:productID/verify" element={<ProductEditVerify />} />
-          <Route path="/edit/:productID" element={<ProductEditPage />} />
-          <Route path="/delete-success" element={<DeleteSuccess />} />
-          <Route path="/create" element={<ProductCreate />} />
-          <Route path="/create-success" element={<CreateSuccess />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Products />} />
+            <Route path="/available" element={<Products />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/product/:productID" element={<ProductDetail />} />
+            <Route path="/edit/:productID/verify" element={<ProductEditVerify />} />
+            <Route path="/edit/:productID" element={<ProductEditPage />} />
+            <Route path="/delete-success" element={<DeleteSuccess />} />
+            <Route path="/create" element={<ProductCreate />} />
+            <Route path="/create-success" element={<CreateSuccess />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </AuthProvider>
   );
 }
 
