@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/product-edit.css';
 
 const ProductEdit = ({ onSubmit }) => {
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState(null);
+    const navigate = useNavigate(); // jump to another page
     const { productID } = useParams(); // get the productID by param
 
     // Initialize formData with default values
     const [formData, setFormData] = useState({
+        _id: productID,
         title: '',
         seller: '',
         contact: '',
@@ -18,6 +20,7 @@ const ProductEdit = ({ onSubmit }) => {
         price: '',
         location: '',
         status: false,
+        delete: false
     });
 
     useEffect(() => {
@@ -32,6 +35,7 @@ const ProductEdit = ({ onSubmit }) => {
                 setProduct(data); // update product data from null to what we want
                  // Initialize formData directly after fetching product data
                 setFormData({
+                    _id: productID,
                     title: data.title || '',
                     seller: data.seller || '',
                     contact: data.contact || '',
@@ -40,7 +44,8 @@ const ProductEdit = ({ onSubmit }) => {
                     condition: data.condition || '',
                     price: data.price || '',
                     location: data.location || '',
-                    status: data.status === 'Unavailable',
+                    status: data.status || 'Unavailable',
+                    delete: false
                 });
             } catch (error) {
                 console.error("Error fetching product detail:", error);
@@ -58,15 +63,36 @@ const ProductEdit = ({ onSubmit }) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === 'checkbox' ? (checked ? 'Unavailable' : 'Available') : value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(formData);
-  };
+    const name = e.nativeEvent.submitter.name;
+    try {
+      const response = await fetch(`http://localhost:3000/edit/${productID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData), // send new product information
+      });
 
+      //console.log('Response:', response);
+
+      if (response.ok && name === 'save') {
+        // save success, jump to product detail page
+        navigate(`/product/${productID}`);
+      }
+      if (response.ok && name ==='delete') {
+        // save success, jump to delete success page
+        navigate(`/delete-success`);
+      } 
+    } catch (error) {
+      console.error('Error update product:', error);
+    }
+  };
 
   return (
     <div className="edit-container">
@@ -172,12 +198,16 @@ const ProductEdit = ({ onSubmit }) => {
           <input
             type="checkbox"
             name="status"
-            checked={formData.status}
+            checked={formData.status === 'Unavailable'}
             onChange={handleChange}
           />
         </div>
         <div className="form-group button-group">
-          <button className="edit-button" type="submit">
+          <button 
+            className="edit-button" 
+            type="submit"
+            name="save"
+          >
             Save Changes
           </button>
         </div>
@@ -186,6 +216,7 @@ const ProductEdit = ({ onSubmit }) => {
             className="delete-button"
             type="submit"
             name="delete"
+            onClick={handleChange}
             value="true"
           >
             Delete Post

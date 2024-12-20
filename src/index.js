@@ -6,6 +6,9 @@ import ProductDetail from './components/Product-detail';
 import ProductEditVerify from './components/Product-edit-verify';
 import ProductEditPage from './components/Product-edit-page';
 import LoginPage from './components/Login_page'; // Your Login page component
+import DeleteSuccess from './components/Delete-success';
+import ProductCreate from './components/Product-create'
+import CreateSuccess from './components/Create-success';
 
 import reportWebVitals from './reportWebVitals';
 import{
@@ -26,6 +29,9 @@ export default function App(){
           <Route path="/product/:productID" element={<ProductDetail />} />
           <Route path="/edit/:productID/verify" element={<ProductEditVerify />} />
           <Route path="/edit/:productID" element={<ProductEditPage />} />
+          <Route path="/delete-success" element={<DeleteSuccess />} />
+          <Route path="/create" element={<ProductCreate />} />
+          <Route path="/create-success" element={<CreateSuccess />} />
         </Routes>
       </Layout>
     </Router>
