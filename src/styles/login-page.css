@@ -1,0 +1,65 @@
+/* Facebook-style login container */
+.facebook-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+  }
+  
+  /* Login box */
+  .facebook-login-box {
+    background-color: white;
+    padding: 30px 20px;
+    width: 360px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+  }
+  
+  /* Facebook title */
+  .facebook-title {
+    color: #1877f2;
+    font-family: "Arial", sans-serif;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  /* Form input fields */
+  .facebook-input {
+    width: 100%;
+    padding: 12px 10px;
+    margin-bottom: 15px;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  /* Login button */
+  .facebook-login-button {
+    width: 100%;
+    padding: 12px 10px;
+    background-color: #1877f2;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .facebook-login-button:hover {
+    background-color: #145dbf;
+  }
+  
+  /* Forgot password link */
+  .facebook-forgot-password {
+    color: #1877f2;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .facebook-forgot-password:hover {
+    text-decoration: underline;
+  }
+  

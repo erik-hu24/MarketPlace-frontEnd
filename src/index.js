@@ -5,6 +5,7 @@ import Products from './components/Products';
 import ProductDetail from './components/Product-detail';
 import ProductEditVerify from './components/Product-edit-verify';
 import ProductEditPage from './components/Product-edit-page';
+import LoginPage from './components/Login_page'; // Your Login page component
 
 import reportWebVitals from './reportWebVitals';
 import{
@@ -21,6 +22,7 @@ export default function App(){
         <Routes>
           <Route path="/" element={<Products />} />
           <Route path="/available" element={<Products />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/product/:productID" element={<ProductDetail />} />
           <Route path="/edit/:productID/verify" element={<ProductEditVerify />} />
           <Route path="/edit/:productID" element={<ProductEditPage />} />
