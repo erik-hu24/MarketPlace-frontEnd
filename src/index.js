@@ -5,22 +5,21 @@ import Products from './components/Products';
 import ProductDetail from './components/Product-detail';
 import ProductEditVerify from './components/Product-edit-verify';
 import ProductEditPage from './components/Product-edit-page';
-import LoginPage from './components/Login_page'; // Your Login page component
+import LoginPage from './components/Login_page';
 import RegisterPage from './components/Register_page';
 import DeleteSuccess from './components/Delete-success';
-import ProductCreate from './components/Product-create'
+import ProductCreate from './components/Product-create';
 import CreateSuccess from './components/Create-success';
-import { AuthProvider } from "./AuthContext"; // 导入 AuthContext
+import { AuthProvider } from './AuthContext';
 
 import reportWebVitals from './reportWebVitals';
-import{
+import {
   BrowserRouter as Router,
   Routes,
   Route,
-  //Link
-} from "react-router-dom";
+} from 'react-router-dom';
 
-export default function App(){
+export default function App() {
   return (
     <AuthProvider>
       <Router>
