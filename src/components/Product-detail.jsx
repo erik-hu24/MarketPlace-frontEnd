@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import '../styles/product-detail.css';
+import { AuthContext } from '../AuthContext';
 
 const ProductDetail = () => {
   const { productID } = useParams(); // get the productID by param
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { isLoggedIn, loggedInUser } = useContext(AuthContext);
+  const [offerPrice, setOfferPrice] = useState('');
+  const [showOfferInput, setShowOfferInput] = useState(false);
 
   useEffect(() => {
     // get the product information, asynchronous
@@ -29,6 +33,71 @@ const ProductDetail = () => {
   // if statement to block the render we want
   if (loading) return <p>Loading product details...</p>;
 
+  const handlePurchase = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/email/send-purchase-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          productId: productID,
+          productTitle: product.title,
+          price: product.price,
+          seller: product.username,
+          buyerName: loggedInUser 
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send purchase request');
+      }
+
+      alert('Purchase request has been sent to the seller!');
+    } catch (error) {
+      console.error('Error sending purchase request:', error);
+      alert('Failed to send purchase request. Please try again later.');
+    }
+  };
+
+  const handleOffer = async () => {
+    if (!offerPrice) {
+      alert('Please enter your offer price');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:3000/email/send-offer-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          productId: productID,
+          productTitle: product.title,
+          originalPrice: product.price,
+          offerPrice: offerPrice,
+          seller: product.username,
+          buyerName: loggedInUser 
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send offer');
+      }
+
+      alert('Your offer has been sent to the seller!');
+      setOfferPrice('');
+      setShowOfferInput(false);
+    } catch (error) {
+      console.error('Error sending offer:', error);
+      alert('Failed to send offer. Please try again later.');
+    }
+  };
+
+  // check the current prodcut and the login user are the same or not
+  const isOwner = isLoggedIn && loggedInUser === product?.username;
+
   return (
     <div className="product-details-container">
       <h1 className="product-title">{product.title}</h1>
@@ -51,8 +120,48 @@ const ProductDetail = () => {
       </div>
 
       <div className="button-container">
-        <a href="/" className="button-back">Back to Products</a>
-        <a href={`/edit/${productID}/verify`} className="button-edit">Edit Post</a>
+        <Link to="/" className='button-back'>Back to Products</Link>
+        <Link 
+          to={isOwner ? `/edit/${productID}` : `/edit/${productID}/verify`} 
+          className="button-edit"
+        >
+          Edit Post
+        </Link>
+        
+        {isLoggedIn && (
+          <>
+            <button className="button-purchase" onClick={handlePurchase}>
+              Purchase at CA ${product.price}
+            </button>
+            
+            <div className="offer-section">
+              <button 
+                className="button-offer"
+                onClick={() => setShowOfferInput(!showOfferInput)}
+              >
+                Make an Offer
+              </button>
+              
+              {showOfferInput && (
+                <div className="offer-input-container">
+                  <input
+                    type="number"
+                    value={offerPrice}
+                    onChange={(e) => setOfferPrice(e.target.value)}
+                    placeholder="Enter your offer"
+                    className="offer-input"
+                  />
+                  <button 
+                    className="button-submit-offer"
+                    onClick={handleOffer}
+                  >
+                    Submit Offer
+                  </button>
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
