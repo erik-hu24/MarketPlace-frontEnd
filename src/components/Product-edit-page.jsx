@@ -27,7 +27,7 @@ const ProductEdit = ({ onSubmit }) => {
     // get the product information, asynchronous
         const fetchProduct = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/edit/${productID}`); 
+                const response = await fetch(`http://54.82.75.121/edit/${productID}`); 
                 if (!response.ok) {
                 throw new Error(`Failed to fetch product: ${response.statusText}`);
                 }
@@ -71,7 +71,7 @@ const ProductEdit = ({ onSubmit }) => {
     e.preventDefault();
     const name = e.nativeEvent.submitter.name;
     try {
-      const response = await fetch(`http://localhost:3000/edit/${productID}`, {
+      const response = await fetch(`http://54.82.75.121/edit/${productID}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

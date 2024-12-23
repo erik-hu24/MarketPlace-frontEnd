@@ -15,7 +15,7 @@ const ProductDetail = () => {
     // get the product information, asynchronous
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/product/${productID}`); 
+        const response = await fetch(`http://54.82.75.121/product/${productID}`); 
         if (!response.ok) {
           throw new Error(`Failed to fetch product: ${response.statusText}`);
         }
@@ -35,7 +35,7 @@ const ProductDetail = () => {
 
   const handlePurchase = async () => {
     try {
-      const response = await fetch('http://localhost:3000/email/send-purchase-email', {
+      const response = await fetch('http://54.82.75.121/email/send-purchase-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const ProductDetail = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/email/send-offer-email', {
+      const response = await fetch('http://54.82.75.121/email/send-offer-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
