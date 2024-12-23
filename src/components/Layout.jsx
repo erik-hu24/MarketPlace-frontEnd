@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../AuthContext"; // 引入 AuthContext
 import "../styles/style.css";
@@ -8,9 +8,13 @@ import ChatApp from "../components/ChatApp"; // 引入 ChatApp 组件
 
 const Layout = ({ children }) => {
   const navigate = useNavigate();
+  const location = useLocation(); // 获取当前路径
   const { isLoggedIn, setIsLoggedIn, loggedInUser, setLoggedInUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
+
+  // check if the user in the product detail page or not
+  const isProductDetailPage = location.pathname.startsWith('/product/');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -103,8 +107,8 @@ const Layout = ({ children }) => {
 
       {children}
 
-      {/* 嵌入式聊天窗口 */}
-      {isLoggedIn && (
+       {/* chat system will display when user click into product detail page */}
+      {isLoggedIn && isProductDetailPage && (
         <div className="chat-container">
           <ChatApp />
         </div>
