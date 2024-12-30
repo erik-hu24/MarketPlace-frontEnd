@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
     username: "",
+    email: "",
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -21,7 +22,7 @@ const RegisterPage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://54.82.75.121/users/register", formData);
+      const response = await axios.post("http://localhost:3000/users/register", formData);
       setSuccessMessage(response.data.message);
       setErrorMessage(""); // Clear error message
       // Redirect to login page on success
@@ -50,6 +51,17 @@ const RegisterPage = () => {
               placeholder="Username"
               className="register-input"
               value={formData.username}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              className="register-input"
+              value={formData.email}
               onChange={handleInputChange}
               required
             />

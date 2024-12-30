@@ -1,86 +1,129 @@
-/* Facebook-style login container */
-.facebook-login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f2f5;
-  }
+/* Hackhub-style login container */
+.Hackhub-login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #6b73ff, #ffffff);
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+/* Login box */
+.Hackhub-login-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  background-color: white;
+  padding: 40px 30px;
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+
+/* Hackhub title */
+.Hackhub-title {
+  color: #1877f2;
+  font-size: 32px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.Hackhub-login-form {
+  width: 80%;
+}
+/* Form input fields */
+.Hackhub-input {
+  width: 100%;
+  padding: 14px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #dddfe2;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
   
-  /* Login box */
-  .facebook-login-box {
-    background-color: white;
-    padding: 30px 20px;
-    width: 360px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    text-align: center;
-  }
-  
-  /* Facebook title */
-  .facebook-title {
-    color: #1877f2;
-    font-family: "Arial", sans-serif;
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-  
-  /* Form input fields */
-  .facebook-input {
-    width: 100%;
-    padding: 12px 10px;
-    margin-bottom: 15px;
-    border: 1px solid #dddfe2;
-    border-radius: 6px;
-    font-size: 14px;
-  }
-  
-  /* Login button */
-  .facebook-login-button {
-    width: 100%;
-    padding: 12px 10px;
-    background-color: #1877f2;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
-  
-  .facebook-login-button:hover {
-    background-color: #145dbf;
-  }
-  
-  /* Forgot password link */
-  .facebook-forgot-password {
-    color: #1877f2;
-    text-decoration: none;
-    font-size: 14px;
-  }
-  
-  .facebook-forgot-password:hover {
-    text-decoration: underline;
-  }
-  
-  .user-info {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .logout-button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .logout-button:hover {
-    background-color: #0056b3;
-  }
-  
+}
+
+.Hackhub-input:focus {
+  border-color: #1877f2;
+  box-shadow: 0 0 5px rgba(24, 119, 242, 0.5);
+}
+
+/* Login button */
+.Hackhub-login-button {
+  width: 100%;
+  padding: 14px 12px;
+  background-color: #1877f2;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.Hackhub-login-button:hover {
+  background-color: #145dbf;
+  transform: scale(1.02);
+}
+
+.Hackhub-login-button:active {
+  transform: scale(0.98);
+}
+
+/* Forgot password link */
+.Hackhub-forgot-password {
+  color: #1877f2;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.Hackhub-forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Sign up button */
+.register-redirect-button {
+  background-color: transparent;
+  color: #1877f2;
+  font-size: 16px;
+  border: 2px solid #1877f2;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.register-redirect-button:hover {
+  background-color: #1877f2;
+  color: white;
+}
+
+/* Logout button */
+.logout-button {
+  padding: 12px 18px;
+  font-size: 16px;
+  color: white;
+  background-color: #1877f2;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #d93434;
+}
+
+.user-info {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+}

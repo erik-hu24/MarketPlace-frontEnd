@@ -37,7 +37,7 @@ const ProductCreate = () => {
           username: isLoggedIn ? loggedInUser : ''
         };
 
-        const response = await fetch('http://54.82.75.121/create', {
+        const response = await fetch('http://localhost:3000/create', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

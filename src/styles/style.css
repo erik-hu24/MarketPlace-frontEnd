@@ -30,7 +30,7 @@ body {
   .location-display {
     display: flex;
     align-items: center;
-    color: #1877f2; /* Facebook blue color */
+    color: #1877f2; /* Hackhub blue color */
     font-size: 1rem;
   }
   
@@ -92,7 +92,7 @@ body {
     display: flex;
   }
   
-  .facebook-icon{
+  .Hackhub-icon{
     font-size: 2.5rem; 
     color: cornflowerblue; 
     margin-right: 10px;
@@ -102,7 +102,7 @@ body {
     font-size: 1.5rem; /* Adjust text size as needed */
     font-weight: bold;
     color: cornflowerblue; /* Matches the icon color */
-    margin-right: 20px; /* Space between "Facebook" text and search icon */
+    margin-right: 20px; /* Space between "Hackhub" text and search icon */
   }
   
   .search-icon{
@@ -154,7 +154,7 @@ body {
   
   .login-button {
     padding: 10px 20px;
-    background-color: #1877f2; /* Facebook blue */
+    background-color: #1877f2; /* Hackhub blue */
     color: white;
     border: none;
     border-radius: 5px;
@@ -407,6 +407,97 @@ body {
     cursor: pointer;
   }
   
+  /* Top navigation bar */
+.top-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Logo */
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1877f2;
+}
+
+/* Icons */
+.search-icon,
+.house-icon,
+.people-icon,
+.game-icon,
+.google-icon,
+.account-icon {
+  font-size: 20px;
+  margin: 0 10px;
+  color: #333;
+  cursor: pointer;
+}
+
+.search-icon:hover,
+.house-icon:hover,
+.people-icon:hover,
+.game-icon:hover,
+.google-icon:hover,
+.account-icon:hover {
+  color: #1877f2;
+}
+
+/* Search Bar */
+.search-input {
+  width: 200px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+/* User Info */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.welcome-text {
+  font-size: 14px;
+  color: #333;
+}
+
+.logout-button {
+  padding: 5px 10px;
+  font-size: 14px;
+  color: white;
+  background-color: #ff4d4d;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #d93434;
+}
+
+/* Chat System */
+.chat-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
   
   
   

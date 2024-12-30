@@ -128,7 +128,7 @@ const ProductDetail = () => {
           Edit Post
         </Link>
         
-        {isLoggedIn && (
+        {
           <>
             <button className="button-purchase" onClick={handlePurchase}>
               Purchase at CA ${product.price}
@@ -161,7 +161,7 @@ const ProductDetail = () => {
               )}
             </div>
           </>
-        )}
+        }
       </div>
     </div>
   );
