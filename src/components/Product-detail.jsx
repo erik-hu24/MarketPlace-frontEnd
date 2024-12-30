@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import '../styles/product-detail.css';
 import { AuthContext } from '../AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const ProductDetail = () => {
   const { productID } = useParams(); // get the productID by param
@@ -10,6 +11,8 @@ const ProductDetail = () => {
   const { isLoggedIn, loggedInUser } = useContext(AuthContext);
   const [offerPrice, setOfferPrice] = useState('');
   const [showOfferInput, setShowOfferInput] = useState(false);
+  const navigate = useNavigate(); // 添加这一行
+
 
   useEffect(() => {
     // get the product information, asynchronous
@@ -34,6 +37,11 @@ const ProductDetail = () => {
   if (loading) return <p>Loading product details...</p>;
 
   const handlePurchase = async () => {
+    if (!isLoggedIn) {
+      navigate(`/login?from=/product/${productID}`);
+      return;
+    }
+  
     try {
       const response = await fetch('http://localhost:3000/email/send-purchase-email', {
         method: 'POST',
@@ -46,26 +54,31 @@ const ProductDetail = () => {
           price: product.price,
           seller: product.username,
           buyerName: loggedInUser 
-        })
+        }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to send purchase request');
       }
-
+  
       alert('Purchase request has been sent to the seller!');
     } catch (error) {
       console.error('Error sending purchase request:', error);
       alert('Failed to send purchase request. Please try again later.');
     }
   };
-
+  
   const handleOffer = async () => {
+    if (!isLoggedIn) {
+      navigate(`/login?from=/product/${productID}`);
+      return;
+    }
+  
     if (!offerPrice) {
       alert('Please enter your offer price');
       return;
     }
-
+  
     try {
       const response = await fetch('http://localhost:3000/email/send-offer-email', {
         method: 'POST',
@@ -79,13 +92,13 @@ const ProductDetail = () => {
           offerPrice: offerPrice,
           seller: product.username,
           buyerName: loggedInUser 
-        })
+        }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to send offer');
       }
-
+  
       alert('Your offer has been sent to the seller!');
       setOfferPrice('');
       setShowOfferInput(false);
@@ -94,6 +107,8 @@ const ProductDetail = () => {
       alert('Failed to send offer. Please try again later.');
     }
   };
+  
+
 
   // check the current prodcut and the login user are the same or not
   const isOwner = isLoggedIn && loggedInUser === product?.username;
@@ -129,16 +144,31 @@ const ProductDetail = () => {
           Edit Post
         </Link>
         
-        {isLoggedIn && (
+        {
           <>
-            <button className="button-purchase" onClick={handlePurchase}>
+            <button 
+              className="button-purchase" 
+              onClick={() => {
+                if (!isLoggedIn) {
+                  navigate('/login'); // 未登录则跳转到登录页面
+                } else {
+                  handlePurchase(); // 已登录则执行购买操作
+                }
+              }}
+            >
               Purchase at CA ${product.price}
             </button>
             
             <div className="offer-section">
               <button 
                 className="button-offer"
-                onClick={() => setShowOfferInput(!showOfferInput)}
+                onClick={() => {
+                  if (!isLoggedIn) {
+                    navigate('/login'); // 未登录则跳转到登录页面
+                  } else {
+                    setShowOfferInput(!showOfferInput); // 已登录则显示报价输入框
+                  }
+                }}
               >
                 Make an Offer
               </button>
@@ -154,7 +184,13 @@ const ProductDetail = () => {
                   />
                   <button 
                     className="button-submit-offer"
-                    onClick={handleOffer}
+                    onClick={() => {
+                      if (!isLoggedIn) {
+                        navigate('/login'); // 未登录则跳转到登录页面
+                      } else {
+                        handleOffer(); // 已登录则提交报价
+                      }
+                    }}
                   >
                     Submit Offer
                   </button>
@@ -162,7 +198,8 @@ const ProductDetail = () => {
               )}
             </div>
           </>
-        )}
+        }
+
       </div>
     </div>
   );

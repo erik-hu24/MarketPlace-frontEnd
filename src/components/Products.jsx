@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/style.css'; 
+import { Link, useLocation } from 'react-router-dom';
+import '../styles/style.css';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -9,20 +9,28 @@ const Products = () => {
   const [isAvailableOnly, setIsAvailableOnly] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get('query'); // 获取搜索参数
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         // 构建基础 URL
-        let baseUrl = isAvailableOnly ? 
-          'http://localhost:3000/available' : 
-          'http://localhost:3000';
+        let url = isAvailableOnly
+          ? `http://localhost:3000/available?page=${currentPage}`
+          : `http://localhost:3000?page=${currentPage}`;
+        
+        // 添加搜索过滤逻辑
+        if (query) {
+          url += `&query=${encodeURIComponent(query)}`;
+        }
 
-        // 添加分页和类别参数
-        let url = `${baseUrl}?page=${currentPage}`;
+        // 添加类别参数
         if (selectedCategory) {
           url += `&category=${selectedCategory}`;
         }
 
+        // 获取产品数据
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -34,8 +42,9 @@ const Products = () => {
         console.error("Error fetching products:", error);
       }
     };
+
     fetchProducts();
-  }, [currentPage, isAvailableOnly, selectedCategory]);
+  }, [currentPage, isAvailableOnly, selectedCategory, query]);
 
   const handleGotoPage = (pageNum) => {
     if (pageNum >= 1 && pageNum <= totalPages) {
@@ -52,7 +61,7 @@ const Products = () => {
 
   return (
     <div style={{ display: 'flex' }}>
-      {/* left navigation bar*/}
+      {/* 左侧导航栏 */}
       <div className="left-navigation">
         <h1 style={{ fontSize: '40px' }}>MarketPlace</h1>
         <Link 
@@ -111,6 +120,13 @@ const Products = () => {
           </h1>
         </div>
 
+        {/* 显示搜索结果 */}
+        {query && (
+          <div className="search-result-info">
+            <p>Showing results for: <strong>{query}</strong></p>
+          </div>
+        )}
+
         <div className="product-grid">
           {products.map((product) => (
             <Link key={product._id} to={`/product/${product._id}`} className="product-link">
@@ -125,7 +141,7 @@ const Products = () => {
           ))}
         </div>
 
-        {/* page */}
+        {/* 分页功能 */}
         <div className="pagination-container">
           {currentPage > 1 && (
             <button

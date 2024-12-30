@@ -11,53 +11,81 @@ const Layout = ({ children }) => {
   const location = useLocation(); // 获取当前路径
   const { isLoggedIn, setIsLoggedIn, loggedInUser, setLoggedInUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({ username: "", password: "" });
-  const [errorMessage, setErrorMessage] = useState("");
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   // check if the user in the product detail page or not
   const isProductDetailPage = location.pathname.startsWith('/product/');
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:3000/users/login", formData);
-      localStorage.setItem("token", response.data.token);
-      setIsLoggedIn(true);
-      setLoggedInUser(formData.username);
-      setErrorMessage("");
-      setFormData({ username: "", password: "" });
-      alert("Login successful!");
-    } catch (error) {
-      setErrorMessage("Invalid username or password. Please try again.");
-      console.error("Login failed:", error);
-    }
-  };
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await axios.post("http://localhost:3000/users/login", formData);
+  //     localStorage.setItem("token", response.data.token);
+  //     setIsLoggedIn(true);
+  //     setLoggedInUser(formData.username);
+  //     setErrorMessage("");
+  //     setFormData({ username: "", password: "" });
+  //     alert("Login successful!");
+  //   } catch (error) {
+  //     setErrorMessage("Invalid username or password. Please try again.");
+  //     console.error("Login failed:", error);
+  //   }
+  // };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     setLoggedInUser("");
-    setErrorMessage("");
     navigate("/");
   };
+
+  const toggleSearchBar = () => {
+    setIsSearchVisible(!isSearchVisible);
+  };
+
+  const handleSearchInputChange = (e) => {
+    setSearchTerm(e.target.value);
+    // Optional: Perform search/filter logic here
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/?query=${searchTerm}`);
+  };
+  
 
   return (
     <>
       <div className="top-navigation">
-        <i className="bi-facebook facebook-icon" />
-        <span className="logo-text">facebook</span>
-        <i className="bi-search search-icon" />
+        <span className="logo-text">Hackhub</span>
+        <i className="bi-search search-icon"
+          title="Search"
+          style={{ cursor: "pointer" }}
+          onClick={toggleSearchBar}
+        />
+        {isSearchVisible && (
+          <form onSubmit={handleSearchSubmit} className="search-form">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search products..."
+              value={searchTerm}
+              onChange={handleSearchInputChange}
+            />
+            <button type="submit" className="search-submit-button">
+              Search
+            </button>
+          </form>
+        )}
+
         <div className="top-mid-nav">
           <Link to="/">
             <i className="bi-shop house-icon" />
           </Link>
         </div>
 
-        {!isLoggedIn ? (
+        {/* {!isLoggedIn ? (
           <form className="login-form" onSubmit={handleLogin}>
             <input
               type="text"
@@ -87,10 +115,18 @@ const Layout = ({ children }) => {
               Logout
             </button>
           </div>
-        )}
+        )} */}
+
+      {isLoggedIn && (
+        <div className="user-info">
+        <span className="welcome-text">Welcome, {loggedInUser}!</span>
+        <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+      )}
 
         <div className="top-right-nav">
-          <i className="bi-bell-fill msg-icon" title="Notifications" />
           <i
             className="bi-person-circle account-icon"
             title="Account"

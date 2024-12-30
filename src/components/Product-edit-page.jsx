@@ -206,7 +206,7 @@ const ProductEdit = ({ onSubmit }) => {
             required
           />
         </div>
-        
+
         <div className="form-group">
             <label htmlFor="category">Category:</label>
             <select
