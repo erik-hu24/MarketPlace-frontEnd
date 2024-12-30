@@ -3,39 +3,27 @@ import { Link } from 'react-router-dom';
 import '../styles/style.css'; 
 
 const Products = () => {
-  const [location, setLocation] = useState('Loading location...');
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isAvailableOnly, setIsAvailableOnly] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
-    // 获取位置信息
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        const { latitude: lat, longitude: lon } = position.coords;
-        try {
-          const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
-          );
-          const data = await response.json();
-          const city = data.address.city || data.address.town || data.address.village || "Unknown Location";
-          setLocation(city);
-        } catch (error) {
-          console.error("Error fetching location:", error);
-          setLocation("Location not found");
-        }
-      });
-    }
-
-    // 获取产品数据
     const fetchProducts = async () => {
       try {
-        const url = isAvailableOnly
-          ? `http://54.82.75.121/available?page=${currentPage}`
-          : `http://54.82.75.121?page=${currentPage}`;
-        const response = await fetch(url);
+        // 构建基础 URL
+        let baseUrl = isAvailableOnly ? 
+          'http://localhost:3000/available' : 
+          'http://localhost:3000';
 
+        // 添加分页和类别参数
+        let url = `${baseUrl}?page=${currentPage}`;
+        if (selectedCategory) {
+          url += `&category=${selectedCategory}`;
+        }
+
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -47,7 +35,7 @@ const Products = () => {
       }
     };
     fetchProducts();
-  }, [currentPage,isAvailableOnly]);
+  }, [currentPage, isAvailableOnly, selectedCategory]);
 
   const handleGotoPage = (pageNum) => {
     if (pageNum >= 1 && pageNum <= totalPages) {
@@ -55,12 +43,27 @@ const Products = () => {
     }
   };
 
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(prevCategory => 
+      prevCategory === category ? null : category
+    );
+    setCurrentPage(1); // back to first page
+  };
+
   return (
     <div style={{ display: 'flex' }}>
       {/* left navigation bar*/}
       <div className="left-navigation">
         <h1 style={{ fontSize: '40px' }}>MarketPlace</h1>
-        <Link to="/" className="sell-product" onClick={() => setIsAvailableOnly(false)}>
+        <Link 
+          to="/" 
+          className="sell-product" 
+          onClick={() => {
+            setIsAvailableOnly(false);
+            setSelectedCategory(null);
+            setCurrentPage(1);
+          }}
+        >
           <div className="nav-item">
             <i className="bi-shop icon" /> Browse all
           </div>
@@ -77,44 +80,42 @@ const Products = () => {
         </Link>
         <hr />
         <h1 style={{ fontSize: '30px' }}>Categories</h1>
-        <div className="nav-item">
-          <i className="bi-award icon" /> Clothes
-        </div>
-        <div className="nav-item">
-          <i className="bi-bag icon" /> Bags
-        </div>
-        <div className="nav-item">
-          <i className="bi-house icon" /> Houses
-        </div>
-        <div className="nav-item">
-          <i className="bi-ev-front icon" /> Vehicles
-        </div>
-        <div className="nav-item">
-          <i className="bi-box icon" /> Free Stuffs
-        </div>
-        <div className="nav-item">
-          <i className="bi-tags icon" /> Classifieds
-        </div>
-        <div className="nav-item">
-          <i className="bi-phone icon" /> Electronics
-        </div>
+        {[
+          { name: 'Clothes', icon: 'bi-award' },
+          { name: 'Bags', icon: 'bi-bag' },
+          { name: 'Houses', icon: 'bi-house' },
+          { name: 'Vehicles', icon: 'bi-ev-front' },
+          { name: 'Free Stuffs', icon: 'bi-box' },
+          { name: 'Electronics', icon: 'bi-phone' },
+          { name: 'Others', icon: 'bi-tags' }
+        ].map(category => (
+          <div
+            key={category.name}
+            className="nav-item"
+            onClick={() => handleCategoryClick(category.name)}
+            style={{
+              cursor: 'pointer',
+              backgroundColor: selectedCategory === category.name ? '#e4e6eb' : 'transparent'
+            }}
+          >
+            <i className={`${category.icon} icon`} /> {category.name}
+          </div>
+        ))}
       </div>
 
-      {/* 主内容区域 */}
       <div className="main-content">
         <div className="header-container">
-          <h1 className="my-h1">Today's picks</h1>
-          <div className="location-display">
-            <i className="bi-geo-alt-fill location-icon" />
-            <span className="location-text">{location}</span>
-          </div>
+          <h1 className="my-h1">
+            {selectedCategory ? `${selectedCategory} - ` : ''}
+            {isAvailableOnly ? 'Available Items' : "Today's picks"}
+          </h1>
         </div>
 
         <div className="product-grid">
           {products.map((product) => (
             <Link key={product._id} to={`/product/${product._id}`} className="product-link">
               <div className="product-card">
-                <img className="product-img" src={product.imageURL} alt="product" />
+                <img className="product-img" src={`data:image/jpeg;base64,${product.imageURL}`} alt="product" />
                 <p>CA ${product.price}</p>
                 <p>{product.title || 'N/A'}</p>
                 <p>{product.location || 'N/A'}</p>

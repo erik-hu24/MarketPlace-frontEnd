@@ -6,19 +6,35 @@ import '../styles/product-create.css';
 const ProductCreate = () => {
     const navigate = useNavigate();
     const { isLoggedIn, loggedInUser } = useContext(AuthContext);
+    const [imageFile, setImageFile] = useState(null);
 
     const [formData, setFormData] = useState({
       title: '',
       seller: '',
       contact: '',
-      imageURL: '',
+      // imageURL: '',
       description: '',
       condition: '',
       price: '',
       location: '',
+      category:'',
       status: 'Available',
       username: isLoggedIn ? loggedInUser : '', // initial username
     });
+
+    const categories = [
+      'Clothes',
+      'Bags',
+      'Houses',
+      'Electronics',
+      'Vehicles',
+      'Free Stuffs',
+      'Others'
+    ];
+
+    const handleImageChange = (e) => {
+      setImageFile(e.target.files[0]);
+    };
 
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -30,25 +46,27 @@ const ProductCreate = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      try {
-        // if user login late, update the null username 
-        const dataToSubmit = {
-          ...formData,
-          username: isLoggedIn ? loggedInUser : ''
-        };
+      const data = new FormData();
 
-        const response = await fetch('http://54.82.75.121/create', {
+      // Append form fields
+      Object.keys(formData).forEach((key) => {
+        data.append(key, formData[key]);
+      });
+
+      // Append image file
+      if (imageFile) {
+        data.append('imageURL', imageFile); 
+      }
+
+      try {
+        const response = await fetch('http://localhost:3000/create', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(dataToSubmit),
+          body: data, // send new product
         });
 
         if (response.ok) {
-          // get data, and send password to another router
-          const data = await response.json();
-          navigate('/create-success', { state: { productPassword: data.productPassword } });
+          const responseData = await response.json();
+          navigate('/create-success', { state: { productPassword: responseData.productPassword } });
         } else {
           console.error('Failed to create product');
         }
@@ -95,17 +113,6 @@ const ProductCreate = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="imageURL">Image URL:</label>
-            <input
-              type="text"
-              name="imageURL"
-              value={formData.imageURL}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
             <label htmlFor="description">Description:</label>
             <textarea
               name="description"
@@ -146,6 +153,35 @@ const ProductCreate = () => {
               name="location"
               value={formData.location}
               onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="category">Category:</label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select a category</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="imageURL">Image:</label>
+            <input
+              type="file"
+              accept="image/*"
+              name="imageURL"
+              value={formData.imageURL}
+              onChange={handleImageChange}
               required
             />
           </div>

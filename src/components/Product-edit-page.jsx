@@ -7,6 +7,7 @@ const ProductEdit = ({ onSubmit }) => {
     const [product, setProduct] = useState(null);
     const navigate = useNavigate(); // jump to another page
     const { productID } = useParams(); // get the productID by param
+    const [imageFile, setImageFile] = useState(null);
 
     // Initialize formData with default values
     const [formData, setFormData] = useState({
@@ -18,16 +19,26 @@ const ProductEdit = ({ onSubmit }) => {
         description: '',
         condition: '',
         price: '',
+        category:'',
         location: '',
         status: false,
-        delete: false
     });
+
+    const categories = [
+      'Clothes',
+      'Bags',
+      'Houses',
+      'Electronics',
+      'Vehicles',
+      'Free Stuffs',
+      'Others'
+    ];
 
     useEffect(() => {
     // get the product information, asynchronous
         const fetchProduct = async () => {
             try {
-                const response = await fetch(`http://54.82.75.121/edit/${productID}`); 
+                const response = await fetch(`http://localhost:3000/edit/${productID}`); 
                 if (!response.ok) {
                 throw new Error(`Failed to fetch product: ${response.statusText}`);
                 }
@@ -43,9 +54,9 @@ const ProductEdit = ({ onSubmit }) => {
                     description: data.description || '',
                     condition: data.condition || '',
                     price: data.price || '',
+                    category: data.category || '',
                     location: data.location || '',
                     status: data.status || 'Unavailable',
-                    delete: false
                 });
             } catch (error) {
                 console.error("Error fetching product detail:", error);
@@ -59,6 +70,10 @@ const ProductEdit = ({ onSubmit }) => {
   // if statement to block the render we want
   if (loading) return <p>Loading product edit page...</p>;
 
+  const handleImageChange = (e) => {
+    setImageFile(e.target.files[0]); // new obj
+  };  
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -68,17 +83,26 @@ const ProductEdit = ({ onSubmit }) => {
   };
 
   const handleSubmit = async (e) => {
+    console.log(formData);
     e.preventDefault();
     const name = e.nativeEvent.submitter.name;
-    try {
-      const response = await fetch(`http://54.82.75.121/edit/${productID}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData), // send new product information
-      });
+    const data = new FormData();
 
+     // Append form fields
+     Object.keys(formData).forEach((key) => {
+      data.append(key, formData[key]);
+    });
+
+     // Append the image file only if a new image is selected
+     if (imageFile) {
+      data.append('imageURL', imageFile);
+    }
+
+    try {
+      const response = await fetch(`http://localhost:3000/edit/${productID}`, {
+        method: 'PUT',
+        body: data,
+    });
       //console.log('Response:', response);
 
       if (response.ok && name === 'save') {
@@ -100,7 +124,7 @@ const ProductEdit = ({ onSubmit }) => {
       {product.imageURL && (
         <img
           className="product-image"
-          src={product.imageURL}
+          src={`data:image/jpeg;base64,${product.imageURL}`}
           alt={product.title || "No image available"}
         />
       )}
@@ -134,17 +158,6 @@ const ProductEdit = ({ onSubmit }) => {
             type="text"
             name="contact"
             value={formData.contact}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="imageURL">Image URL:</label>
-          <input
-            className="edit-input"
-            type="text"
-            name="imageURL"
-            value={formData.imageURL}
             onChange={handleChange}
             required
           />
@@ -191,6 +204,34 @@ const ProductEdit = ({ onSubmit }) => {
             value={formData.location}
             onChange={handleChange}
             required
+          />
+        </div>
+        
+        <div className="form-group">
+            <label htmlFor="category">Category:</label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select a category</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+
+        <div className="form-group">
+          <label htmlFor="imageURL">Image: </label>
+          <input
+            type="file"
+            accept="image/*"
+            name="imageURL"
+            //value={formData.imageURL}
+            onChange={handleImageChange}
           />
         </div>
         <div className="form-group">

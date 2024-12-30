@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 
 // 连接到后端服务器
-const socket = io("http://54.82.75.121", {
+const socket = io("http://localhost:3000", {
     path: "/socket.io/", // 与后端匹配
   }); // 确保地址与后端一致
 

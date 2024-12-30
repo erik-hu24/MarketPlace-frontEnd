@@ -15,7 +15,7 @@ const ProductDetail = () => {
     // get the product information, asynchronous
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://54.82.75.121/product/${productID}`); 
+        const response = await fetch(`http://localhost:3000/product/${productID}`); 
         if (!response.ok) {
           throw new Error(`Failed to fetch product: ${response.statusText}`);
         }
@@ -35,7 +35,7 @@ const ProductDetail = () => {
 
   const handlePurchase = async () => {
     try {
-      const response = await fetch('http://54.82.75.121/email/send-purchase-email', {
+      const response = await fetch('http://localhost:3000/email/send-purchase-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const ProductDetail = () => {
     }
 
     try {
-      const response = await fetch('http://54.82.75.121/email/send-offer-email', {
+      const response = await fetch('http://localhost:3000/email/send-offer-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ const ProductDetail = () => {
       <div className="product-info">
         <img
           className="product-image"
-          src={product.imageURL || "/placeholder.png"}
+          src={`data:image/jpeg;base64,${product.imageURL}` || "/placeholder.png"}
           alt={product.title || "No image available"}
         />
         <div className="product-meta">
@@ -114,6 +114,7 @@ const ProductDetail = () => {
           <p><strong>Description:</strong> {product.description || 'No description available'}</p>
           <p><strong>Price:</strong> CA ${product.price}</p>
           <p><strong>Condition:</strong> {product.condition || 'N/A'}</p>
+          <p><strong>Category:</strong> {product.category || 'N/A'}</p>
           <p><strong>Location:</strong> {product.location || 'N/A'}</p>
           <p><strong>Contact:</strong> {product.contact || 'N/A'}</p>
         </div>

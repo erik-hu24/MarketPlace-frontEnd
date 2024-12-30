@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://54.82.75.121/users/login", formData);
+      const response = await axios.post("http://localhost:3000/users/login", formData);
       localStorage.setItem("token", response.data.token);
       setIsLoggedIn(true);
       setLoggedInUser(formData.username);
@@ -55,11 +55,6 @@ const Layout = ({ children }) => {
           <Link to="/">
             <i className="bi-shop house-icon" />
           </Link>
-          <i className="bi-people people-icon" />
-          <i className="bi-controller game-icon" />
-          <a href="https://www.google.com">
-            <i className="bi-google google-icon" />
-          </a>
         </div>
 
         {!isLoggedIn ? (
