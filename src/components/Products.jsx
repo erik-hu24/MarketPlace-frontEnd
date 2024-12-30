@@ -9,28 +9,25 @@ const Products = () => {
   const [isAvailableOnly, setIsAvailableOnly] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
+  const location = useLocation();  // 使用 useLocation 获取当前 URL 信息
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get('query'); // 获取搜索参数
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        // 构建基础 URL
         let url = isAvailableOnly
           ? `http://localhost:3000/available?page=${currentPage}`
           : `http://localhost:3000?page=${currentPage}`;
-        
-        // 添加搜索过滤逻辑
+
         if (query) {
           url += `&query=${encodeURIComponent(query)}`;
         }
 
-        // 添加类别参数
         if (selectedCategory) {
           url += `&category=${selectedCategory}`;
         }
 
-        // 获取产品数据
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -39,7 +36,7 @@ const Products = () => {
         setProducts(data.productList || []);
         setTotalPages(data.totalPages || 1);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error('Error fetching products:', error);
       }
     };
 
@@ -53,7 +50,7 @@ const Products = () => {
   };
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(prevCategory => 
+    setSelectedCategory((prevCategory) =>
       prevCategory === category ? null : category
     );
     setCurrentPage(1); // back to first page
@@ -61,12 +58,12 @@ const Products = () => {
 
   return (
     <div style={{ display: 'flex' }}>
-      {/* 左侧导航栏 */}
+      {/* Left Navigation */}
       <div className="left-navigation">
         <h1 style={{ fontSize: '40px' }}>MarketPlace</h1>
-        <Link 
-          to="/" 
-          className="sell-product" 
+        <Link
+          to="/"
+          className="sell-product"
           onClick={() => {
             setIsAvailableOnly(false);
             setSelectedCategory(null);
@@ -96,15 +93,15 @@ const Products = () => {
           { name: 'Vehicles', icon: 'bi-ev-front' },
           { name: 'Free Stuffs', icon: 'bi-box' },
           { name: 'Electronics', icon: 'bi-phone' },
-          { name: 'Others', icon: 'bi-tags' }
-        ].map(category => (
+          { name: 'Others', icon: 'bi-tags' },
+        ].map((category) => (
           <div
-            key={category.name}
             className="nav-item"
+            key={category.name}
             onClick={() => handleCategoryClick(category.name)}
             style={{
               cursor: 'pointer',
-              backgroundColor: selectedCategory === category.name ? '#e4e6eb' : 'transparent'
+              backgroundColor: selectedCategory === category.name ? '#e4e6eb' : 'transparent',
             }}
           >
             <i className={`${category.icon} icon`} /> {category.name}
@@ -112,6 +109,7 @@ const Products = () => {
         ))}
       </div>
 
+      {/* Main Content */}
       <div className="main-content">
         <div className="header-container">
           <h1 className="my-h1">
@@ -120,7 +118,6 @@ const Products = () => {
           </h1>
         </div>
 
-        {/* 显示搜索结果 */}
         {query && (
           <div className="search-result-info">
             <p>Showing results for: <strong>{query}</strong></p>
@@ -141,7 +138,7 @@ const Products = () => {
           ))}
         </div>
 
-        {/* 分页功能 */}
+        {/* Pagination */}
         <div className="pagination-container">
           {currentPage > 1 && (
             <button
@@ -156,9 +153,7 @@ const Products = () => {
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}
-                className={`pagination-button ${
-                  page === currentPage ? 'pagination-current' : ''
-                }`}
+                className={`pagination-button ${page === currentPage ? 'pagination-current' : ''}`}
                 onClick={() => setCurrentPage(page)}
               >
                 {page}

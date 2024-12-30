@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+//import axios from "axios";
 import { AuthContext } from "../AuthContext"; // 引入 AuthContext
 import "../styles/style.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation(); // 获取当前路径
   const { isLoggedIn, setIsLoggedIn, loggedInUser, setLoggedInUser } = useContext(AuthContext);
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  //const [formData, setFormData] = useState({ username: "", password: "" });
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
