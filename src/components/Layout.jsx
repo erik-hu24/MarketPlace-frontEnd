@@ -58,7 +58,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <div className="top-navigation">
-        <span className="logo-text">Hackhub</span>
+        <span className="logo-text">MyMarket</span>
         <i className="bi-search search-icon"
           title="Search"
           style={{ cursor: "pointer" }}

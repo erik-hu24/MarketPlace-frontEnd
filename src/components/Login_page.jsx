@@ -63,19 +63,19 @@ const LoginPage = () => {
 
   return (
     
-    <div className="Hackhub-login-container">
-      <div className="Hackhub-login-box">
+    <div className="MyMarket-login-container">
+      <div className="MyMarket-login-box">
         {!isLoggedIn ? (
           // 登录表单
           <>
-            <h1 className="Hackhub-title">Hackhub</h1>
-            <form className="Hackhub-login-form" onSubmit={handleSubmit}>
+            <h1 className="MyMarket-title">MyMarket</h1>
+            <form className="MyMarket-login-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <input
                   type="email"
                   name="email"
                   placeholder="Email"
-                  className="Hackhub-input"
+                  className="MyMarket-input"
                   value={formData.email}
                   onChange={handleInputChange}
                   required
@@ -86,18 +86,18 @@ const LoginPage = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  className="Hackhub-input"
+                  className="MyMarket-input"
                   value={formData.password}
                   onChange={handleInputChange}
                   required
                 />
               </div>
-              <button type="submit" className="Hackhub-login-button">
+              <button type="submit" className="MyMarket-login-button">
                 Log in
               </button>
             </form>
             {errorMessage && (
-              <p className="Hackhub-error-message">{errorMessage}</p>
+              <p className="MyMarket-error-message">{errorMessage}</p>
             )}
             <button
               className="register-redirect-button"
@@ -105,7 +105,7 @@ const LoginPage = () => {
             >
               Sign up
             </button>
-            <a href="/forgot-password" className="Hackhub-forgot-password">
+            <a href="/forgot-password" className="MyMarket-forgot-password">
               Forget your account?
             </a>
           </>

@@ -149,11 +149,7 @@ const ProductDetail = () => {
             <button 
               className="button-purchase" 
               onClick={() => {
-                if (!isLoggedIn) {
-                  navigate('/login'); // 未登录则跳转到登录页面
-                } else {
                   handlePurchase(); // 已登录则执行购买操作
-                }
               }}
             >
               Purchase at CA ${product.price}
@@ -163,11 +159,7 @@ const ProductDetail = () => {
               <button 
                 className="button-offer"
                 onClick={() => {
-                  if (!isLoggedIn) {
-                    navigate('/login'); // 未登录则跳转到登录页面
-                  } else {
                     setShowOfferInput(!showOfferInput); // 已登录则显示报价输入框
-                  }
                 }}
               >
                 Make an Offer

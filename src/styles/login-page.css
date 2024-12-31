@@ -1,5 +1,5 @@
-/* Hackhub-style login container */
-.Hackhub-login-container {
+/* MyMarket-style login container */
+.MyMarket-login-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@
 }
 
 /* Login box */
-.Hackhub-login-box {
+.MyMarket-login-box {
   display: flex;
   flex-direction: column;
   justify-content: center; /* Center vertically */
@@ -23,19 +23,19 @@
 }
 
 
-/* Hackhub title */
-.Hackhub-title {
+/* MyMarket title */
+.MyMarket-title {
   color: #1877f2;
   font-size: 32px;
   margin-bottom: 30px;
   font-weight: bold;
 }
 
-.Hackhub-login-form {
+.MyMarket-login-form {
   width: 80%;
 }
 /* Form input fields */
-.Hackhub-input {
+.MyMarket-input {
   width: 100%;
   padding: 14px 12px;
   margin-bottom: 20px;
@@ -47,13 +47,13 @@
   
 }
 
-.Hackhub-input:focus {
+.MyMarket-input:focus {
   border-color: #1877f2;
   box-shadow: 0 0 5px rgba(24, 119, 242, 0.5);
 }
 
 /* Login button */
-.Hackhub-login-button {
+.MyMarket-login-button {
   width: 100%;
   padding: 14px 12px;
   background-color: #1877f2;
@@ -67,23 +67,23 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.Hackhub-login-button:hover {
+.MyMarket-login-button:hover {
   background-color: #145dbf;
   transform: scale(1.02);
 }
 
-.Hackhub-login-button:active {
+.MyMarket-login-button:active {
   transform: scale(0.98);
 }
 
 /* Forgot password link */
-.Hackhub-forgot-password {
+.MyMarket-forgot-password {
   color: #1877f2;
   text-decoration: none;
   font-size: 14px;
 }
 
-.Hackhub-forgot-password:hover {
+.MyMarket-forgot-password:hover {
   text-decoration: underline;
 }
 
