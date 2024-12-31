@@ -1,5 +1,5 @@
-/* MyMarket-style login container */
-.MyMarket-login-container {
+/* MarketBay-style login container */
+.MarketBay-login-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@
 }
 
 /* Login box */
-.MyMarket-login-box {
+.MarketBay-login-box {
   display: flex;
   flex-direction: column;
   justify-content: center; /* Center vertically */
@@ -23,19 +23,19 @@
 }
 
 
-/* MyMarket title */
-.MyMarket-title {
+/* MarketBay title */
+.MarketBay-title {
   color: #1877f2;
   font-size: 32px;
   margin-bottom: 30px;
   font-weight: bold;
 }
 
-.MyMarket-login-form {
+.MarketBay-login-form {
   width: 80%;
 }
 /* Form input fields */
-.MyMarket-input {
+.MarketBay-input {
   width: 100%;
   padding: 14px 12px;
   margin-bottom: 20px;
@@ -47,13 +47,13 @@
   
 }
 
-.MyMarket-input:focus {
+.MarketBay-input:focus {
   border-color: #1877f2;
   box-shadow: 0 0 5px rgba(24, 119, 242, 0.5);
 }
 
 /* Login button */
-.MyMarket-login-button {
+.MarketBay-login-button {
   width: 100%;
   padding: 14px 12px;
   background-color: #1877f2;
@@ -67,23 +67,23 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.MyMarket-login-button:hover {
+.MarketBay-login-button:hover {
   background-color: #145dbf;
   transform: scale(1.02);
 }
 
-.MyMarket-login-button:active {
+.MarketBay-login-button:active {
   transform: scale(0.98);
 }
 
 /* Forgot password link */
-.MyMarket-forgot-password {
+.MarketBay-forgot-password {
   color: #1877f2;
   text-decoration: none;
   font-size: 14px;
 }
 
-.MyMarket-forgot-password:hover {
+.MarketBay-forgot-password:hover {
   text-decoration: underline;
 }
 

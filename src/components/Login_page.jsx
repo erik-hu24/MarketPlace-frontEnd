@@ -63,19 +63,19 @@ const LoginPage = () => {
 
   return (
     
-    <div className="MyMarket-login-container">
-      <div className="MyMarket-login-box">
+    <div className="MarketBay-login-container">
+      <div className="MarketBay-login-box">
         {!isLoggedIn ? (
           // 登录表单
           <>
-            <h1 className="MyMarket-title">MyMarket</h1>
-            <form className="MyMarket-login-form" onSubmit={handleSubmit}>
+            <h1 className="MarketBay-title">MarketBay</h1>
+            <form className="MarketBay-login-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <input
                   type="email"
                   name="email"
                   placeholder="Email"
-                  className="MyMarket-input"
+                  className="MarketBay-input"
                   value={formData.email}
                   onChange={handleInputChange}
                   required
@@ -86,18 +86,18 @@ const LoginPage = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  className="MyMarket-input"
+                  className="MarketBay-input"
                   value={formData.password}
                   onChange={handleInputChange}
                   required
                 />
               </div>
-              <button type="submit" className="MyMarket-login-button">
+              <button type="submit" className="MarketBay-login-button">
                 Log in
               </button>
             </form>
             {errorMessage && (
-              <p className="MyMarket-error-message">{errorMessage}</p>
+              <p className="MarketBay-error-message">{errorMessage}</p>
             )}
             <button
               className="register-redirect-button"
@@ -105,7 +105,7 @@ const LoginPage = () => {
             >
               Sign up
             </button>
-            <a href="/forgot-password" className="MyMarket-forgot-password">
+            <a href="/forgot-password" className="MarketBay-forgot-password">
               Forget your account?
             </a>
           </>
