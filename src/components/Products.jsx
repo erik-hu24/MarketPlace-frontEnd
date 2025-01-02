@@ -60,7 +60,7 @@ const Products = () => {
     <div style={{ display: 'flex' }}>
       {/* Left Navigation */}
       <div className="left-navigation">
-        <h1 style={{ fontSize: '40px' }}>MarketPlace</h1>
+        <h1 style={{ fontSize: '25px' }}>MarketPlace</h1>
         <Link
           to="/"
           className="sell-product"
@@ -85,7 +85,7 @@ const Products = () => {
           </div>
         </Link>
         <hr />
-        <h1 style={{ fontSize: '30px' }}>Categories</h1>
+        <h1 style={{ fontSize: '25px' }}>Categories</h1>
         {[
           { name: 'Clothes', icon: 'bi-award' },
           { name: 'Bags', icon: 'bi-bag' },
@@ -129,7 +129,7 @@ const Products = () => {
             <Link key={product._id} to={`/product/${product._id}`} className="product-link">
               <div className="product-card">
                 <img className="product-img" src={`data:image/jpeg;base64,${product.imageURL}`} alt="product" />
-                <p>CA ${product.price}</p>
+                <p><strong>CA ${product.price}</strong></p>
                 <p>{product.title || 'N/A'}</p>
                 <p>{product.location || 'N/A'}</p>
                 <p>{product.status}</p>

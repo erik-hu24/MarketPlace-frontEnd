@@ -8,7 +8,7 @@ body {
   }
   
   p{
-    font-size: 20px;
+    font-size: 15px;
   }
   
   html {
@@ -23,8 +23,9 @@ body {
   }
   
   .my-h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
+    color: #010306;
   }
   
   .location-display {
@@ -48,9 +49,11 @@ body {
   /* Container for the grid layout */
   .product-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Adjust the number to change books per row */
-    gap: 15px; /* Space between books */
-    padding: 10px;
+    /* 表示 5 列等宽，如果需要在小屏幕也保持一行，可使用 minmax() 或 media query */
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 10px;  /* 每个卡片之间的间距 */
+    margin: 0 auto; /* 让整体居中(可选) */
+    max-width: 1200px; /* 根据需要设置一个最大宽度，防止过分拉伸 */
   }
   
   /* Individual book card */
@@ -64,8 +67,8 @@ body {
   }
   
   .product-img {
-    width: 300px;
-    height: 350px;
+    width: 250px;
+    height: 280px;
     border: 1px solid #ddd;
     border-radius: 15px;  
   }
@@ -238,7 +241,7 @@ body {
     padding-right: 5px;
     position: fixed;
     left: 0;
-    width: 260px; /* Set the width for the sidebar */
+    width: 250px; /* Set the width for the sidebar */
     height: calc(100vh - 40px); /* Ensure it fills the remaining viewport height */
     overflow-y: auto;
     background-color: #ffffff;
