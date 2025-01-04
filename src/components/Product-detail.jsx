@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import '../styles/product-detail.css';
 import { AuthContext } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
+import ChatApp from './ChatApp';
 
 const ProductDetail = () => {
   const { productID } = useParams(); // get the productID by param
@@ -12,6 +13,7 @@ const ProductDetail = () => {
   const [offerPrice, setOfferPrice] = useState('');
   const [showOfferInput, setShowOfferInput] = useState(false);
   const navigate = useNavigate(); // 添加这一行
+  const [showChat, setShowChat] = useState(false);
 
 
   useEffect(() => {
@@ -115,84 +117,79 @@ const ProductDetail = () => {
 
   return (
     <div className="product-details-container">
-      <h1 className="product-title">{product.title}</h1>
-
-      <div className="product-info">
+      <div className="product-image-container">
         <img
           className="product-image"
           src={`data:image/jpeg;base64,${product.imageURL}` || "/placeholder.png"}
           alt={product.title || "No image available"}
         />
+      </div>
+
+      <div className="product-info-sidebar">
+        <h1 className="product-title">{product.title}</h1>
+        <div className="product-price">CA ${product.price}</div>
+
+        <div className="navigation-buttons">
+          <Link to="/" className='button-back'>Back to Products</Link>
+          <Link 
+            to={isOwner ? `/edit/${productID}` : `/edit/${productID}/verify`} 
+            className="button-edit"
+          >
+            Edit Post
+          </Link>
+        </div>
+
         <div className="product-meta">
           <p><strong>Status:</strong> {product.status}</p>
           <p><strong>Seller:</strong> {product.seller || 'N/A'}</p>
           <p><strong>Description:</strong> {product.description || 'No description available'}</p>
-          <p><strong>Price:</strong> CA ${product.price}</p>
           <p><strong>Condition:</strong> {product.condition || 'N/A'}</p>
           <p><strong>Category:</strong> {product.category || 'N/A'}</p>
           <p><strong>Location:</strong> {product.location || 'N/A'}</p>
           <p><strong>Contact:</strong> {product.contact || 'N/A'}</p>
         </div>
-      </div>
 
-      <div className="button-container">
-        <Link to="/" className='button-back'>Back to Products</Link>
-        <Link 
-          to={isOwner ? `/edit/${productID}` : `/edit/${productID}/verify`} 
-          className="button-edit"
-        >
-          Edit Post
-        </Link>
-        
-        {
-          <>
-            <button 
-              className="button-purchase" 
-              onClick={() => {
-                  handlePurchase(); // 已登录则执行购买操作
-              }}
-            >
-              Purchase at CA ${product.price}
-            </button>
-            
-            <div className="offer-section">
-              <button 
-                className="button-offer"
-                onClick={() => {
-                    setShowOfferInput(!showOfferInput); // 已登录则显示报价输入框
-                }}
-              >
-                Make an Offer
+        <div className="action-buttons">
+          <button className="button-purchase" onClick={handlePurchase}>
+            Purchase at CA ${product.price}
+          </button>
+          
+          <button className="button-offer" onClick={() => setShowOfferInput(!showOfferInput)}>
+            Make an Offer
+          </button>
+
+          <button className="button-chat" onClick={() => setShowChat(true)}>
+            Chat with Seller
+          </button>
+          
+          {showOfferInput && (
+            <div className="offer-input-container">
+              <input
+                type="number"
+                value={offerPrice}
+                onChange={(e) => setOfferPrice(e.target.value)}
+                placeholder="Enter your offer"
+                className="offer-input"
+              />
+              <button className="button-submit-offer" onClick={handleOffer}>
+                Submit
               </button>
-              
-              {showOfferInput && (
-                <div className="offer-input-container">
-                  <input
-                    type="number"
-                    value={offerPrice}
-                    onChange={(e) => setOfferPrice(e.target.value)}
-                    placeholder="Enter your offer"
-                    className="offer-input"
-                  />
-                  <button 
-                    className="button-submit-offer"
-                    onClick={() => {
-                      if (!isLoggedIn) {
-                        navigate('/login'); // 未登录则跳转到登录页面
-                      } else {
-                        handleOffer(); // 已登录则提交报价
-                      }
-                    }}
-                  >
-                    Submit Offer
-                  </button>
-                </div>
-              )}
             </div>
-          </>
-        }
-
+          )}
+        </div>
       </div>
+
+      {showChat && (
+        <div className="chat-container">
+          <button className="close-chat" onClick={() => setShowChat(false)}>
+            ×
+          </button>
+          <ChatApp 
+            seller={product.username}
+            productId={productID}
+          />
+        </div>
+      )}
     </div>
   );
 };

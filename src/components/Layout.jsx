@@ -1,21 +1,21 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 //import axios from "axios";
 import { AuthContext } from "../AuthContext"; // 引入 AuthContext
 import "../styles/style.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import ChatApp from "../components/ChatApp"; // 引入 ChatApp 组件
+// import ChatApp from "../components/ChatApp"; // 引入 ChatApp 组件
 
 const Layout = ({ children }) => {
   const navigate = useNavigate();
-  const location = useLocation(); // 获取当前路径
+  // const location = useLocation(); // 获取当前路径
   const { isLoggedIn, setIsLoggedIn, loggedInUser, setLoggedInUser } = useContext(AuthContext);
   //const [formData, setFormData] = useState({ username: "", password: "" });
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   // check if the user in the product detail page or not
-  const isProductDetailPage = location.pathname.startsWith('/product/');
+  // const isProductDetailPage = location.pathname.startsWith('/product/');
 
   // const handleLogin = async (e) => {
   //   e.preventDefault();
@@ -85,38 +85,6 @@ const Layout = ({ children }) => {
           </Link>
         </div>
 
-        {/* {!isLoggedIn ? (
-          <form className="login-form" onSubmit={handleLogin}>
-            <input
-              type="text"
-              placeholder="Username"
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-            />
-            <button className="login-button" type="submit">
-              Login
-            </button>
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-          </form>
-        ) : (
-          <div className="user-info">
-            <span className="welcome-text">Welcome, {loggedInUser}!</span>
-            <button className="logout-button" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        )} */}
-
       {isLoggedIn && (
         <div className="user-info">
         <span className="welcome-text">Welcome, {loggedInUser}!</span>
@@ -138,12 +106,12 @@ const Layout = ({ children }) => {
 
       {children}
 
-       {/* chat system will display when user click into product detail page */}
+       {/* chat system will display when user click into product detail page
       {isLoggedIn && isProductDetailPage && (
         <div className="chat-container">
           <ChatApp />
         </div>
-      )}
+      )} */}
     </>
   );
 };

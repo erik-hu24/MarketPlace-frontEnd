@@ -1,142 +1,126 @@
 /* Center the container and add padding */
 .product-details-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
     background-color: #fff;
+    display: flex;
+    height: calc(100vh - 60px); /* Adjust based on your top navigation height */
 }
 
-/* Product title */
-.product-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
+/* Left side - Image container */
+.product-image-container {
+    width: 83.33%; /* 5/6 of the screen */
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
-/* Flexbox layout for image and details */
-.product-info {
+.product-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    margin: 0;
+}
+
+/* Right side - Product info */
+.product-info-sidebar {
+    width: 16.67%; /* 1/6 of the screen */
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    border-left: 1px solid #ddd;
+    position: relative;
 }
 
-/* Image styling */
-.product-image {
-    width: 100%;
-    max-width: 600px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.product-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.product-price {
+    font-size: 20px;
+    font-weight: 600;
     margin-bottom: 20px;
 }
 
-/* Details container */
-.product-meta {
-    width: 100%;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #333;
-}
-
-/* Styling each detail line with consistent label width */
-.product-meta p {
+.navigation-buttons {
     display: flex;
-    margin: 10px 0;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.product-meta strong {
-    color: #555;
-    font-weight: bold;
-    min-width: 120px; /* Sets a consistent width for labels */
-}
-
-/* Styling for the "Back to Products" link */
-.back-link {
-    display: inline-block;
-    margin-top: 20px;
-    font-size: 1rem;
-    color: #1877f2;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.back-link:hover {
-    color: #145dbf;
-    text-decoration: underline;
-}
-
-/* Style for both buttons */
-.button-container a {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px 5px;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border-radius: 5px;
+.button-back, .button-edit {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
     text-decoration: none;
     text-align: center;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Hover effect */
-  .button-container a:hover {
-    background-color: #0056b3;
-  }
-  
-.button-purchase {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin: 0 10px;
+    background-color: #0084ff;
+    color: white;
+    border: none;
 }
 
+.product-meta {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.product-meta p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.action-buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.button-purchase,
 .button-offer {
-  background-color: #2196F3;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin: 0 10px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background-color: #00a651;
+    color: white;
+}
+
+.button-chat {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background-color: #0084ff;
+    color: white;
 }
 
 .offer-section {
-  display: inline-block;
+    width: 100%;
 }
 
 .offer-input-container {
-  margin-top: 10px;
-  display: flex;
-  gap: 10px;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .offer-input {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.button-submit-offer {
-  background-color: #2196F3;
-  color: white;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.button-purchase:hover,
-.button-offer:hover,
-.button-submit-offer:hover {
-  opacity: 0.9;
+    width: 70%;
 }
   

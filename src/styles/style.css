@@ -182,8 +182,8 @@ body {
   }
   
   
-  .people-icon,
-  .game-icon{
+  .people-icon
+  {
     font-size: 2rem;  
     margin-left: 50px;  
     margin-right: 50px; 
@@ -193,19 +193,6 @@ body {
     border-radius: 50%; 
     transition: background-color 0.3s;
   }
-  
-  .house-icon,
-  .google-icon{
-    font-size: 1.8rem;  
-    margin-left: 50px;  
-    margin-right: 50px; 
-    cursor: pointer;
-    color:#888888;
-    padding: 6px; 
-    border-radius: 50%; 
-    transition: background-color 0.3s;
-  }
-  
   
   .account-icon,
   .msg-icon{
@@ -223,16 +210,6 @@ body {
     text-decoration: underline;
   }
   
-  .house-icon:hover,
-  .people-icon:hover,
-  .game-icon:hover,
-  .google-icon:hover, 
-  .search-icon:hover,
-  .msg-icon:hover,
-  .account-icon:hover
-  {
-    background-color: #e0e0e0;
-  }
   
   .left-navigation {
     margin-top: -1px; /* Adjust this value based on the height of your top nav */
@@ -430,15 +407,15 @@ body {
 
 /* Icons */
 .search-icon,
-.house-icon,
 .people-icon,
 .game-icon,
 .google-icon,
+.house-icon,
 .account-icon {
-  font-size: 20px;
+  font-size: 1.6rem;
   margin: 0 10px;
   color: #333;
-  cursor: pointer;
+  cursor: pointer; 
 }
 
 .search-icon:hover,
