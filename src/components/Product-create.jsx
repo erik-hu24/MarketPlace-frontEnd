@@ -25,7 +25,7 @@ const ProductCreate = () => {
 
     const fetchUserEmail = async (username) => {
       try {
-        const response = await fetch(`http://localhost:3000/create/${username}`);
+        const response = await fetch(`http://54.82.75.121/create/${username}`);
         if (!response.ok) {
           throw new Error("Failed to fetch user data");
         }
@@ -92,7 +92,7 @@ const ProductCreate = () => {
       }
 
       try {
-        const response = await fetch('http://localhost:3000/create', {
+        const response = await fetch('http://54.82.75.121/create', {
           method: 'POST',
           body: data, // 发送新产品数据
         });

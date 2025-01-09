@@ -15,7 +15,7 @@ const ProductEditVerify = () => {
     //console.log('Password sent:', password);
 
     try {
-      const response = await fetch(`http://localhost:3000/edit/${productID}/verify`, {
+      const response = await fetch(`http://54.82.75.121/edit/${productID}/verify`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
