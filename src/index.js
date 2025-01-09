@@ -29,14 +29,15 @@ export default function App() {
             <Route path="/available" element={<Products />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/product/:productID" element={<ProductDetail />} />
             <Route path="/email/send-purchase-email" element={<ProductDetail />} />
             <Route path="/email/send-offer-email" element={<ProductDetail />} />
             <Route path="/edit/:productID/verify" element={<ProductEditVerify />} />
             <Route path="/edit/:productID" element={<ProductEditPage />} />
             <Route path="/delete-success" element={<DeleteSuccess />} />
             <Route path="/create" element={<ProductCreate />} />
+            <Route path="/create/:username" element={<ProductCreate />} />
             <Route path="/create-success" element={<CreateSuccess />} />
+            <Route path="/product/:productID" element={<ProductDetail />} />
           </Routes>
         </Layout>
       </Router>

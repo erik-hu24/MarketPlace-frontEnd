@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import '../styles/product-create.css';
@@ -7,20 +7,53 @@ const ProductCreate = () => {
     const navigate = useNavigate();
     const { isLoggedIn, loggedInUser } = useContext(AuthContext);
     const [imageFile, setImageFile] = useState(null);
+    const [email, setEmail] = useState("");
 
     const [formData, setFormData] = useState({
       title: '',
       seller: '',
       contact: '',
-      // imageURL: '',
       description: '',
       condition: '',
       price: '',
       location: '',
-      category:'',
+      category: '',
       status: 'Available',
+      useremail: '', // inital null, dynamic update
       username: isLoggedIn ? loggedInUser : '', // initial username
     });
+
+    const fetchUserEmail = async (username) => {
+      try {
+        const response = await fetch(`http://localhost:3000/create/${username}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+        console.log(`success!!!!!!!!!!!!!!!!!!!!!!! ${username}`);
+        const data = await response.json();
+        console.log("fetch the data is", data);
+        setEmail(data.email); // 设置邮箱状态
+        console.log("email of data is", data.email);
+      } catch (error) {
+        console.error("Error fetching user email:", error);
+      }
+    };
+
+    // when email update, then update formData.useremail
+    useEffect(() => {
+      if (email) {
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          useremail: email,
+        }));
+      }
+    }, [email]);
+
+    useEffect(() => {
+      if (isLoggedIn) {
+        fetchUserEmail(loggedInUser);
+      }
+    }, [loggedInUser, isLoggedIn]);
 
     const categories = [
       'Clothes',
@@ -61,7 +94,7 @@ const ProductCreate = () => {
       try {
         const response = await fetch('http://localhost:3000/create', {
           method: 'POST',
-          body: data, // send new product
+          body: data, // 发送新产品数据
         });
 
         if (response.ok) {
@@ -180,7 +213,6 @@ const ProductCreate = () => {
               type="file"
               accept="image/*"
               name="imageURL"
-              value={formData.imageURL}
               onChange={handleImageChange}
               required
             />

@@ -58,7 +58,9 @@ const Layout = ({ children }) => {
   return (
     <>
       <div className="top-navigation">
-        <span className="logo-text">MarketBay</span>
+        <Link to= "/">
+          <i className="logo-text">MarketBay </i>
+        </Link>
         <i className="bi-search search-icon"
           title="Search"
           style={{ cursor: "pointer" }}
@@ -73,17 +75,17 @@ const Layout = ({ children }) => {
               value={searchTerm}
               onChange={handleSearchInputChange}
             />
-            <button type="submit" className="search-submit-button">
+            <button style={{ fontSize: '14px', color:"white", backgroundColor:"cornflowerblue", borderColor:"cornflowerblue"}} type="submit" className="search-submit-button">
               Search
             </button>
           </form>
         )}
 
-        <div className="top-mid-nav">
+        {/* <div className="top-mid-nav">
           <Link to="/">
             <i className="bi-shop house-icon" />
           </Link>
-        </div>
+        </div> */}
 
       {isLoggedIn && (
         <div className="user-info">

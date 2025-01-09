@@ -7,7 +7,8 @@
     box-shadow: none;
     background-color: #fff;
     display: flex;
-    height: calc(100vh - 60px); /* Adjust based on your top navigation height */
+    height: calc(100vh - 60px); /* Adjust based on top navigation height */
+
 }
 
 /* Left side - Image container */
@@ -38,7 +39,7 @@
 }
 
 .product-title {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
     margin-bottom: 10px;
     text-align: left;
@@ -46,7 +47,7 @@
 
 .product-price {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 20px;
 }
 
@@ -65,6 +66,7 @@
     background-color: #0084ff;
     color: white;
     border: none;
+    width: 200px;
 }
 
 .product-meta {
@@ -121,6 +123,11 @@
 }
 
 .offer-input {
-    width: 70%;
+    width: 75.5%;
+    height: 20px;
+    margin-right: 5px;
 }
   
+.close{
+    margin-left: 273px;
+}

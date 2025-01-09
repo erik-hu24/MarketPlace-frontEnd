@@ -122,8 +122,9 @@
 }
 
 .user-info {
+  margin-left: 1100px;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 4px;
   font-size: 18px;
   color: #333;
 }

@@ -57,10 +57,10 @@ const Products = () => {
   };
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div>
       {/* Left Navigation */}
       <div className="left-navigation">
-        <h1 style={{ fontSize: '25px' }}>MarketPlace</h1>
+        <h1 style={{ fontSize: '22px' }}>MarketPlace</h1>
         <Link
           to="/"
           className="sell-product"
@@ -85,7 +85,7 @@ const Products = () => {
           </div>
         </Link>
         <hr />
-        <h1 style={{ fontSize: '25px' }}>Categories</h1>
+        <h1 style={{ fontSize: '22px' }}>Categories</h1>
         {[
           { name: 'Clothes', icon: 'bi-award' },
           { name: 'Bags', icon: 'bi-bag' },
@@ -95,15 +95,22 @@ const Products = () => {
           { name: 'Electronics', icon: 'bi-phone' },
           { name: 'Others', icon: 'bi-tags' },
         ].map((category) => (
+          // <div
+          //   className="nav-item"
+          //   key={category.name}
+          //   onClick={() => handleCategoryClick(category.name)}
+          //   style={{
+          //     cursor: 'pointer',
+          //     backgroundColor: selectedCategory === category.name ? '#e4e6eb' : 'transparent',
+          //   }}
+          // >
           <div
-            className="nav-item"
+            className={`nav-item ${
+              selectedCategory === category.name ? 'selected' : ''
+            }`}
             key={category.name}
             onClick={() => handleCategoryClick(category.name)}
-            style={{
-              cursor: 'pointer',
-              backgroundColor: selectedCategory === category.name ? '#e4e6eb' : 'transparent',
-            }}
-          >
+          >  
             <i className={`${category.icon} icon`} /> {category.name}
           </div>
         ))}
@@ -129,10 +136,10 @@ const Products = () => {
             <Link key={product._id} to={`/product/${product._id}`} className="product-link">
               <div className="product-card">
                 <img className="product-img" src={`data:image/jpeg;base64,${product.imageURL}`} alt="product" />
-                <p><strong>CA ${product.price}</strong></p>
-                <p>{product.title || 'N/A'}</p>
-                <p>{product.location || 'N/A'}</p>
-                <p>{product.status}</p>
+                <p className="home-product-price"><strong>CA ${product.price}</strong></p>
+                <p className="home-product-title">{product.title || 'N/A'}</p>
+                <p className="home-product-location">{product.location || 'N/A'}</p>
+                <p className="home-product-status">{product.status}</p>
               </div>
             </Link>
           ))}

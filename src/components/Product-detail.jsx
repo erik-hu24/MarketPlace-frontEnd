@@ -54,7 +54,7 @@ const ProductDetail = () => {
           productId: productID,
           productTitle: product.title,
           price: product.price,
-          seller: product.username,
+          seller: product.useremail,
           buyerName: loggedInUser 
         }),
       });
@@ -92,7 +92,7 @@ const ProductDetail = () => {
           productTitle: product.title,
           originalPrice: product.price,
           offerPrice: offerPrice,
-          seller: product.username,
+          seller: product.useremail,
           buyerName: loggedInUser 
         }),
       });
@@ -140,52 +140,53 @@ const ProductDetail = () => {
         </div>
 
         <div className="product-meta">
-          <p><strong>Status:</strong> {product.status}</p>
-          <p><strong>Seller:</strong> {product.seller || 'N/A'}</p>
-          <p><strong>Description:</strong> {product.description || 'No description available'}</p>
-          <p><strong>Condition:</strong> {product.condition || 'N/A'}</p>
-          <p><strong>Category:</strong> {product.category || 'N/A'}</p>
-          <p><strong>Location:</strong> {product.location || 'N/A'}</p>
-          <p><strong>Contact:</strong> {product.contact || 'N/A'}</p>
+          <p style={{ fontSize: '14px' }}><strong>Status:</strong> {product.status}</p>
+          <p style={{ fontSize: '14px' }}><strong>Seller:</strong> {product.seller || 'N/A'}</p>
+          <p style={{ fontSize: '14px' }}><strong>Description:</strong> {product.description || 'No description available'}</p>
+          <p style={{ fontSize: '14px' }}><strong>Condition:</strong> {product.condition || 'N/A'}</p>
+          <p style={{ fontSize: '14px' }}><strong>Category:</strong> {product.category || 'N/A'}</p>
+          <p style={{ fontSize: '14px' }}><strong>Location:</strong> {product.location || 'N/A'}</p>
+          <p style={{ fontSize: '14px' }}><strong>Contact:</strong> {product.contact || 'N/A'}</p>
         </div>
 
         <div className="action-buttons">
+          <button className="button-offer" onClick={() => setShowOfferInput(!showOfferInput)}>
+              Make an Offer
+          </button>
+          {showOfferInput && (
+              <div className="offer-input-container">
+                <input
+                  type="number"
+                  value={offerPrice}
+                  onChange={(e) => setOfferPrice(e.target.value)}
+                  placeholder="Enter your offer"
+                  className="offer-input"
+                />
+                <button style={{ fontSize: '14px', color:"white", backgroundColor:"cornflowerblue", borderColor:"cornflowerblue"}} className="button-submit-offer" onClick={handleOffer}>
+                  Submit
+                </button>
+              </div>
+            )}
           <button className="button-purchase" onClick={handlePurchase}>
             Purchase at CA ${product.price}
-          </button>
-          
-          <button className="button-offer" onClick={() => setShowOfferInput(!showOfferInput)}>
-            Make an Offer
           </button>
 
           <button className="button-chat" onClick={() => setShowChat(true)}>
             Chat with Seller
           </button>
-          
-          {showOfferInput && (
-            <div className="offer-input-container">
-              <input
-                type="number"
-                value={offerPrice}
-                onChange={(e) => setOfferPrice(e.target.value)}
-                placeholder="Enter your offer"
-                className="offer-input"
-              />
-              <button className="button-submit-offer" onClick={handleOffer}>
-                Submit
-              </button>
-            </div>
-          )}
+
         </div>
       </div>
 
       {showChat && (
         <div className="chat-container">
-          <button className="close-chat" onClick={() => setShowChat(false)}>
-            ×
-          </button>
+          <div className = "close">
+            <button style={{ backgroundColor: "white",color:"blue", fontSize:"18px" }} className="close-chat" onClick={() => setShowChat(false)}>
+              ×
+            </button>
+          </div>
           <ChatApp 
-            seller={product.username}
+            seller={product.useremail}
             productId={productID}
           />
         </div>

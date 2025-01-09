@@ -55,7 +55,7 @@ const ChatApp = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type a message"
-          style={{ width: "50%", padding: "10px", marginRight: "10px" }}
+          style={{ width: "70%", padding: "10px", marginRight: "10px", marginLeft:"5px" }}
           required
         />
         <button type="submit" style={{ padding: "10px" }}>
