@@ -87,16 +87,15 @@ const Layout = ({ children }) => {
           </Link>
         </div> */}
 
-      {isLoggedIn && (
-        <div className="user-info">
-        <span className="welcome-text">Welcome, {loggedInUser}!</span>
-        <button className="logout-button" onClick={handleLogout}>
-          Logout
-        </button>
-      </div>
-      )}
-
         <div className="top-right-nav">
+          {isLoggedIn && (
+            <div className="user-info">
+              <span className="welcome-text">Welcome, {loggedInUser}!</span>
+              <button className="logout-button" onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          )}
           <i
             className="bi-person-circle account-icon"
             title="Account"

@@ -18,7 +18,7 @@ const Products = () => {
       try {
         let url = isAvailableOnly
           ? `http://54.82.75.121/available?page=${currentPage}`
-          : `http://54.82.75.121?page=${currentPage}`;
+          : `http://localhost:3000?page=${currentPage}`;
 
         if (query) {
           url += `&query=${encodeURIComponent(query)}`;

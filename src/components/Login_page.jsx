@@ -105,9 +105,6 @@ const LoginPage = () => {
             >
               Sign up
             </button>
-            <a href="/forgot-password" className="MarketBay-forgot-password">
-              Forget your account?
-            </a>
           </>
         ) : (
           // 显示已登录用户和注销按钮
